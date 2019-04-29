@@ -15,11 +15,27 @@
 // 	}
 // });
 
-$("li").click(function(){
+$("ul").on("click", "li", function(){		//use on rather than click
+//on can be used for potential future elements
+//click only work for existing elements, when add new li, not work
 	$(this).toggleClass("completed");
 });
 
-//Click on X to delete Todo
-$("span").click(function(){
-
+//Click on <span> to delete Todo
+$("ul").on("click", "span", function(event){
+	$(this).parent().fadeOut(500, function(){	//parent for both <li> & <span>
+		$(this).remove();	//remove after fadeout
+	});
+	event.stopPropagation();	//not execute "li" func
 });
+
+//Create new Todo
+$("input[type='text']").keypress(function(event){
+	if(event.which === 13){		//enter
+		//grab new todo text from input
+		var todo = $(this).val();
+		$(this).val("");	//clear input
+		//create a new li and add to ul
+		$("ul").append("<li><span>X</span> " + todo + "</li>");
+	}
+})
