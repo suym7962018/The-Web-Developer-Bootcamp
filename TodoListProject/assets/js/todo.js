@@ -39,3 +39,8 @@ $("input[type='text']").keypress(function(event){
 		$("ul").append("<li><span><i class='fas fa-trash-alt'></i></span> " + todo + "</li>");
 	}
 })
+
+//toggle the add new todo 
+$("#toggle-form").click(function(){
+	$("input[type='text']").fadeToggle();
+})
